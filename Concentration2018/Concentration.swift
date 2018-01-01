@@ -29,6 +29,7 @@ class Concentration {
                 indexOfOneAndOnlyFacedUp = nil
                 
             }
+                
             else {
                 // either no cards or 2 cards are faced up
                 for flipDownIndex in cards.indices {
