@@ -22,6 +22,21 @@ class ViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var newGameButt: UIButton!
+    
+    @IBAction func newGameButtonIsPressed(_ sender: UIButton) {
+    
+        flipCount = 0
+        
+        for index in cardButtons.indices {
+            
+        let restartButton = cardButtons[index]
+        
+            restartButton.setTitle("", for: .normal)
+            restartButton.backgroundColor = #colorLiteral(red: 1, green: 0.5433388929, blue: 0, alpha: 1)
+        }
+    }
+    
     
     
     @IBOutlet weak var flipCountLabel: UILabel!
@@ -38,10 +53,7 @@ class ViewController: UIViewController {
             
             updateViewFromModel()
         }
-        
-        else {
-            
-        }
+       
     }
     
     
@@ -68,7 +80,7 @@ class ViewController: UIViewController {
     
     var emoji = [Int : String]()
     
-     var emojiChoices = ["👻", "🦐", "🍒", "🐃", "🐊", "👮🏻‍♂️", "👿", "🤩", "🤪"]
+    var emojiChoices = ["👻", "🦐", "🍒", "🐃", "🐊", "👮🏻‍♂️", "👿", "🤩", "🤪", "🐰", "🏐", "⛹🏻‍♂️", "⛸"]
     
     func emoji(for card: Card) -> String {
     
@@ -84,6 +96,8 @@ class ViewController: UIViewController {
             return emoji[card.identifier] ?? "?"
        
     }
+    
+ 
    
 }
 

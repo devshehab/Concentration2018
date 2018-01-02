@@ -43,20 +43,28 @@ class Concentration {
        
     }
     }
-    init(numberOfPairsOfCards: Int) {
-        
-        for _ in 1...numberOfPairsOfCards {
-            
-            let card = Card()
-   
-            
-            cards += [card, card]
-            
-        }
-        
-        //TODO : shuffle the cards
-        
-    }
     
+    
+    init(numberOfPairsOfCards: Int) {
+       
+//        var unShuffeldCards: [Card] = []
+       
+        for _ in 1...numberOfPairsOfCards {
+         
+            var card = Card()
+          
+            cards += [card, card]
+        }
+        //    TODO: Shuffle the cards
+       
+//        while !unShuffeldCards.isEmpty {
+//
+//            let randomIndex = unShuffeldCards.count.arc4Random
+//
+//            let card = unShuffeldCards.remove(at: randomIndex)
+//
+//            cards.append(card)
+//        }
+    }
 }
 
