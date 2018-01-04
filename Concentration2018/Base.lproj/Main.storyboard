@@ -205,25 +205,12 @@
                                     <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2tx-FO-epY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXQ-Mq-NVY">
-                                <rect key="frame" x="98" y="638" width="178" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.2246628852739726" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="New Game">
-                                    <color key="titleColor" red="1" green="0.54333889290000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="newGameButtonIsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZRr-uH-0PI"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="flipCountLabel" destination="T7U-Fp-mAC" id="UEc-bT-LL7"/>
-                        <outlet property="newGameButt" destination="iXQ-Mq-NVY" id="PCN-L4-JKG"/>
                         <outletCollection property="cardButtons" destination="Sph-Dp-V8A" collectionClass="NSMutableArray" id="fTY-jB-4Of"/>
                         <outletCollection property="cardButtons" destination="Ua5-cF-ecE" collectionClass="NSMutableArray" id="E2U-Ee-0Fu"/>
                         <outletCollection property="cardButtons" destination="EPw-cK-80C" collectionClass="NSMutableArray" id="m8J-mN-esj"/>

@@ -10,41 +10,61 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    
+    var numberOfPairsOfCards: Int {
+     
+            return (cardButtons.count + 1) / 2
+        
+        
+    }
     
    
     
-    var flipCount = 0 {
+    private(set) var flipCount = 0 {
         didSet {
-            
-            flipCountLabel.text = "Flips: \(flipCount)"
+           updateFlipCountLabel()
         }
         
     }
     
-    @IBOutlet weak var newGameButt: UIButton!
-    
-    @IBAction func newGameButtonIsPressed(_ sender: UIButton) {
-    
-        flipCount = 0
+    private func updateFlipCountLabel() {
         
-        for index in cardButtons.indices {
-            
-        let restartButton = cardButtons[index]
+        let attributes : [NSAttributedStringKey: Any] = [ .strokeWidth: 5.0, .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1) ]
         
-            restartButton.setTitle("", for: .normal)
-            restartButton.backgroundColor = #colorLiteral(red: 1, green: 0.5433388929, blue: 0, alpha: 1)
+        let attributeString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        
+        flipCountLabel.attributedText = attributeString
+        
+    }
+    
+//    @IBOutlet private weak var newGameButt: UIButton!
+    
+//    @IBAction private func newGameButtonIsPressed(_ sender: UIButton) {
+//
+//        flipCount = 0
+//
+//        for index in cardButtons.indices {
+//
+//        let restartButton = cardButtons[index]
+//
+//            restartButton.setTitle("", for: .normal)
+//            restartButton.backgroundColor = #colorLiteral(red: 1, green: 0.5433388929, blue: 0, alpha: 1)
+//        }
+//    }
+    
+    
+    
+    @IBOutlet private weak var flipCountLabel: UILabel! {
+        didSet {
+            updateFlipCountLabel()
         }
     }
     
+    @IBOutlet private var cardButtons: [UIButton]!
     
     
-    @IBOutlet weak var flipCountLabel: UILabel!
-    
-    @IBOutlet var cardButtons: [UIButton]!
-    
-    
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchCard(_ sender: UIButton) {
         flipCount += 1
         
         if let cardNumber = cardButtons.index(of: sender) {
@@ -57,7 +77,7 @@ class ViewController: UIViewController {
     }
     
     
-    func updateViewFromModel() {
+   private func updateViewFromModel() {
         
         for index in cardButtons.indices {
             
@@ -78,26 +98,45 @@ class ViewController: UIViewController {
         }
     }
     
-    var emoji = [Int : String]()
+    private var emoji = [Card : String]()
     
-    var emojiChoices = ["👻", "🦐", "🍒", "🐃", "🐊", "👮🏻‍♂️", "👿", "🤩", "🤪", "🐰", "🏐", "⛹🏻‍♂️", "⛸"]
+    private var emojiChoices = "👻🦐🍒🐃🐊👮🏻‍♂️👿🤩🤪🐰🏐⛹🏻‍♂️⛸"
     
-    func emoji(for card: Card) -> String {
+    private func emoji(for card: Card) -> String {
     
-        if emoji[card.identifier] == nil {
+        if emoji[card] == nil {
             
             if emojiChoices.count > 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-            
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+         
+                let randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4Random)
+            emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
         }
         }
       
-            return emoji[card.identifier] ?? "?"
+            return emoji[card] ?? "?"
        
     }
     
  
    
 }
+
+extension Int {
+    
+    var arc4Random: Int {
+        if self > 0 {
+        return Int(arc4random_uniform(UInt32(self)))
+        }
+        else if self < 0 {
+          return -Int(arc4random_uniform(UInt32(abs(self))))
+        }
+        else {
+            return 0
+        }
+    }
+    
+        
+    
+}
+
 

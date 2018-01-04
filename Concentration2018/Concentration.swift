@@ -8,54 +8,61 @@
 
 import Foundation
 
-class Concentration {
+struct Concentration {
     
-    var cards = [Card]()
+    private(set) var cards = [Card]()
     
-    var indexOfOneAndOnlyFacedUp: Int?
+    private var indexOfOneAndOnlyFacedUp: Int? {
+        
+        get {
+           return cards.indices.filter { cards[$0].isfacedUp }.oneAndOnly
+       
+        }
+        set {
+            for index in cards.indices {
+                cards[index].isfacedUp = (index == newValue)
+            }
+        }
+        
+    }
+
+
     
-    func chooseCard(at index: Int) {
+    mutating func chooseCard(at index: Int) {
         if !cards[index].isMatched {
             
             if let matchindex = indexOfOneAndOnlyFacedUp, matchindex != index {
                  //check if card match
                 
-                if cards[matchindex].identifier == cards[index].identifier {
+                if cards[matchindex] == cards[index] {
                     
                     cards[matchindex].isMatched = true
                     cards[index].isMatched = true
                 }
                 cards[index].isfacedUp = true
-                indexOfOneAndOnlyFacedUp = nil
-                
+      
             }
                 
             else {
-                // either no cards or 2 cards are faced up
-                for flipDownIndex in cards.indices {
-                    
-                    cards[flipDownIndex].isfacedUp = false
-            }
-                cards[index].isfacedUp = true
-                
+             
                 indexOfOneAndOnlyFacedUp = index
         }
        
     }
     }
     
-    
+   
     init(numberOfPairsOfCards: Int) {
        
 //        var unShuffeldCards: [Card] = []
        
         for _ in 1...numberOfPairsOfCards {
          
-            var card = Card()
+     let card = Card()
           
             cards += [card, card]
         }
-        //    TODO: Shuffle the cards
+//            TODO: Shuffle the cards
        
 //        while !unShuffeldCards.isEmpty {
 //
@@ -67,4 +74,17 @@ class Concentration {
 //        }
     }
 }
+
+
+extension Collection {
+    var oneAndOnly: Element? {
+        return count == 1 ? first : nil
+    }
+    
+}
+
+
+
+
+
 
